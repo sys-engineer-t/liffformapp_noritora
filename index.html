@@ -93,13 +93,13 @@
                         },
                         success: out => {
                           if(out.rslt=="###"){
-                             document.getElementById('liff-message').innerHTML = '';
+                             document.getElementById('liff-message').innerHTML = '初回登録設定画面';
                              document.getElementById("area").innerHTML = '<form class="w-75 mx-auto"><p id="liff-message"></p><p id="liff-message2"></p><p class="mt-3">氏名(漢字)</p><div><input class="form-control w-100 mt-1" name="name" required></div><p class="mt-3">会員番号</p><div><input class="form-control w-100 mt-1" name="no" placeholder="会員証の番号を入力" required></div><input type="submit" class="mt-4 btn btn-primary" value="登録"></form>';
                           }else{
-                             document.getElementById('liff-message').innerHTML = '初回登録設定画面';
+                             document.getElementById('liff-message').innerHTML = '';
                              document.body.style.backgroundColor = "#99FF99";
-                             var str1 = '<div style="border-style: double;margin: 30% 15%; padding: 5%;"><div style="background-color: #99FF99;"><h5><div style="text-align: center;font-family:Comic Sans MS;font-weight:bold;">トランポリンハウスNORI×NORI</div></h5><div class="" style="text-align: center; margin-top: 5%;">会員番号：'
-                             var str2 = '</div></div></div>'
+                             var str1 = '<div style="border-style: double;margin: 20% 10%; padding: 10%;"><div style="background-color: #99FF99;"><h4><div style="text-align: center;font-family:Comic Sans MS;font-weight:bold;">トランポリンハウスNORI×NORI</div></h4><h6><div class="" style="text-align: center; margin-top: 5%;">会員番号：'
+                             var str2 = '</div></h6></div></div>'
                              document.getElementById("area").innerHTML = str1 + out.rslt + str2
                           }
                         },
