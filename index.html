@@ -10,17 +10,20 @@
 <body>
 
     <form class="w-75 mx-auto">  
-        <p class="mt-3">本名（ひらがな）</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="name" placeholder="" required>
+        <!--
+        <p class="mt-3">氏名（漢字）</p>
+        <div class="row" style="margin:0px">
+            <input class="form-control col mt-1" name="name1" placeholder="" required="">
+            <input class="form-control col mt-1" name="name2" placeholder="" required="">
         </div>
-        <p class="mt-3">ニックネーム</p>
+        -->
+        <p class="mt-3">氏名(漢字)</p>
         <div>
-            <input class="form-control w-100 mt-1" name="name2" >
+            <input class="form-control w-100 mt-1" name="name" required>
         </div>
         <p class="mt-3">会員番号</p>
         <div>
-            <input class="form-control w-100 mt-1" name="no" required>
+            <input class="form-control w-100 mt-1" name="no" placeholder="会員証の番号を入力" required>
         </div>
         <input type="submit" class="mt-4 btn btn-primary" value="登録">
     </form>
@@ -64,10 +67,16 @@
         $(function () {
             $('form').submit(function () {
                 const name    = $('input[name="name"]').val();
-                const name2 = $('input[name="name2"]').val();
                 const no = $('input[name="no"]').val();
-                const msg = `${name}\n${name2}\n${no}`;
-                sendText(msg);
+                if (!no.match(/^[0-9]+$/)) {
+                  //半角数値
+                  window.alert('会員番号は半角数値で入力してください');
+                  return false;
+                }
+                const msg = `${name}\n${no}`;
+                if(window.confirm('氏名(漢字)：'+name+'\n会員番号：'+no+'\n\nこの内容で間違いないですか？')){
+                  sendText(msg);
+                }
                 return false;
             });
         });
