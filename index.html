@@ -39,9 +39,7 @@
 
         $(document).ready(function () {
             const liffId = "1657758889-bBMyjVOA";
-            var lineiId = "";
-            initializeLiff(liffId);
-            
+            var lineiId = "";            
             const divPage = document.getElementById('liff-page');
             
             //p要素の取得
@@ -65,7 +63,11 @@
               })
               .then(()=>{
                    alert("test")
-              })              
+                  initializeApp();
+              }) 
+              .catch((err) => {
+                console.log('LIFF Initialization failed ', err);
+              });
             }else{
               document.body.innerHTML = 'LINEで開いてください'
             }
