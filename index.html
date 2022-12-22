@@ -130,6 +130,10 @@
             });
         }
 
+        function createData(text){
+            window.close();
+            alert("登録完了しました")
+        }
         const params = (new URL(document.location)).searchParams;
         const key = params.get('key');
 
@@ -142,9 +146,9 @@
                   window.alert('会員番号は半角数値で入力してください');
                   return false;
                 }
-                const msg = `${name}\n${no}`;
+                const msg = '${name}\n${no}';
                 if(window.confirm('氏名(漢字)：'+name+'\n会員番号：'+no+'\n\nこの内容で間違いないですか？')){
-                  sendText(msg);
+                  createData(msg);
                 }
                 return false;
             });
