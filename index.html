@@ -42,8 +42,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script>
         const endpoint = "https://script.google.com/macros/s/AKfycbyrce0GVy3CQkfryPmTlAT-DPc8iwdoMF9mEFvf_D3Kmkk1EeSlNIa-k06z7d5pv16B/exec";
-
+        var settei="0";
         $(document).ready(function () {
+            if(settei=="0"){
+            settei=1;   
             const liffId = "1657758889-bBMyjVOA";
             var lineiId = "";            
             const divPage = document.getElementById('liff-page');
@@ -81,6 +83,9 @@
               //doument.body.innerHTML = 'LINEで開いてください'
             }
             
+                
+            
+            }
         })
 
         function ajaxConn(lineId){
@@ -94,6 +99,7 @@
                         success: out => {
                           if(out.rslt=="###"){
                              document.getElementById('liff-message').innerHTML = '初回登録設定画面';
+                             document.getElementById("liff-message").style = "text-align:center;"
                              document.getElementById("area").innerHTML = '<form class="w-75 mx-auto"><p id="liff-message"></p><p id="liff-message2"></p><p class="mt-3">氏名(漢字)</p><div><input class="form-control w-100 mt-1" name="name" required></div><p class="mt-3">会員番号</p><div><input class="form-control w-100 mt-1" name="no" placeholder="会員証の番号を入力" required></div><input type="submit" class="mt-4 btn btn-primary" value="登録"></form>';
                           }else{
                              document.getElementById('liff-message').innerHTML = '';
@@ -135,6 +141,8 @@
         }
 
         function createData(text){
+            document.getElementById('liff-message').innerHTML = '設定完了しました。閉じてください。';
+            document.getElementById("liff-message").style = "text-align:center;"            
             window.close();
             alert("登録完了しました");
         }
