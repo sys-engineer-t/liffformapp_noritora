@@ -107,8 +107,12 @@
                              document.getElementById("area").innerHTML = '<form class="w-75 mx-auto"><p id="liff-message"></p><p id="liff-message2"></p><p class="mt-3">氏名(漢字)</p><div><input class="form-control w-100 mt-1" name="name" required></div><p class="mt-3">会員番号</p><div><input class="form-control w-100 mt-1" name="no" placeholder="会員証の番号を入力" required></div><input type="button" class="mt-4 btn btn-primary" value="登録" onclick="submit_push()"></form>';
                           }else{
                              document.getElementById('liff-message').innerHTML = '';
-                             if(out.rslt == "VVIP"){
-                                 document.body.style.backgroundColor = "#FFD700";                                 
+                             if(out.rslt == "VVIP" || out.rslt == "ENGINEER"){
+                                 document.body.style.backgroundColor = "#FFD700";
+                             }else if(out.rslt == "MASTER"){
+                                 document.body.style.backgroundColor = "#CCCCFF";
+                             }else if(out.rslt == "STAFF"){
+                                 document.body.style.backgroundColor = "#FFCCCC";
                              }else{
                                  document.body.style.backgroundColor = "#99FF99";
                              }
