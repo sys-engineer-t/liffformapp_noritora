@@ -66,14 +66,37 @@
                   lineId = profile.userId;
                 })
                 .then(()=>{
-                  document.body.innerHTML = 'bbbb id' + lineId    
+                  document.body.innerHTML = 'aaaa id' + lineId    
+                    alert("ajax処理開始");
+                    $.ajax({
+                        type: 'GET',
+                        url: endpoint,
+                        dataType: 'jsonp',
+                        data: {
+                          text: lineId
+                        },
+                        success: out => {
+                          alert(out.rslt);
+                          if(out.rslt=="###"){
+                             pElement2.innerHTML = '1度のみの登録となります。'
+                             document.getElementById("area").innerHTML = '<form class="w-75 mx-auto"><p id="liff-message"></p><p id="liff-message2"></p><p class="mt-3">氏名(漢字)</p><div><input class="form-control w-100 mt-1" name="name" required></div><p class="mt-3">会員番号</p><div><input class="form-control w-100 mt-1" name="no" placeholder="会員証の番号を入力" required></div><input type="submit" class="mt-4 btn btn-primary" value="登録"></form>';
+                          }else{
+                             document.body.style.backgroundColor = "#99FF99";
+                             var str1 = '<div style="border-style: double;margin: 10px;padding: 10px;"><div style="background-color: #99FF99;"><h6><div style="text-align: center;font-family:Comic Sans MS;font-weight:bold;">トランポリンハウスNORI×NORI</div></h6><div class="" style="text-align: center;">会員番号：'
+                             var str2 = '</div></div></div>'
+                             document.getElementById("area").innerHTML = str1 + out.rslt + str2
+                          }
+                        },
+                        error: function(){
+                          document.body.innerHTML = ''
+                          alert("通信エラー");
+                        }
+                    });
                 })
+                .catch((err) => {
+                   alert('error');   
+                }
               })
-              .then(()=>{
-                  document.body.innerHTML = 'aaaa id' + lineId
-                   alert(lineId);
-                  // initializeApp();
-              }) 
               .catch((err) => {
                 console.log('LIFF Initialization failed ', err);
               });
