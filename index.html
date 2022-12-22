@@ -67,14 +67,15 @@
                   })
               })
               .then(()=>{
-                   alert(lineId)
+                  document.body.innerHTML = 'aaaa'
+                   alert(lineId);
                   // initializeApp();
               }) 
               .catch((err) => {
                 console.log('LIFF Initialization failed ', err);
               });
             }else{
-              document.body.innerHTML = 'LINEで開いてください'
+              //doument.body.innerHTML = 'LINEで開いてください'
             }
             
         })
