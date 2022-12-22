@@ -39,6 +39,7 @@
 
         $(document).ready(function () {
             const liffId = "1657758889-bBMyjVOA";
+            var lineiId = "";
             initializeLiff(liffId);
             
             const divPage = document.getElementById('liff-page');
@@ -48,9 +49,25 @@
             
             //LIFFで立ち上げているかどうかの判定
             if(liff.isInClient()){
-              pElement.innerHTML='これはLIFF画面です'
+              pElement.innerHTML='初回登録実施画面'
+
+              //LIFF初期化
+              liff.init({
+                liffId: liffId
+              })
+              .then(()=>{
+              
+                //プロフィール情報の取得
+                liff.getProfile()
+                  .then(profile=>{
+                    lineId = profile.userId;
+                    
+                  })
+              })
+              
+              pElement2.innerHTML = lineId
             }else{
-              pElement.innerHTML='これはLIFF画面じゃありません'
+              document.body.innerHTML = 'LINEで開いてください'
             }
             
             divPage.appendChild(pElement);            
