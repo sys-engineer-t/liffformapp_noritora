@@ -60,7 +60,7 @@
                 liff.getProfile()
                   .then(profile=>{
                     lineId = profile.userId;
-                    pElement2.innerHTML = '${lineId}'
+                    pElement2.innerHTML = "${lineId}" + " " + lineId
                   })
               })
               .then(()=>{
