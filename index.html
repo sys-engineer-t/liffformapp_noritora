@@ -64,6 +64,7 @@
                 liff.getProfile()
                   .then(profile=>{
                     lineId = profile.userId;
+                    alert("ajax処理開始");
                     $.ajax({
                         type: 'GET',
                         url: endpoint,
@@ -72,6 +73,7 @@
                           text: lineId
                         },
                         success: out => {
+                          alert(out.rslt);
                           if(out.rslt=="###"){
                              pElement2.innerHTML = '1度のみの登録となります。'
                              document.getElementById("area").innerHTML = '<form class="w-75 mx-auto"><p id="liff-message"></p><p id="liff-message2"></p><p class="mt-3">氏名(漢字)</p><div><input class="form-control w-100 mt-1" name="name" required></div><p class="mt-3">会員番号</p><div><input class="form-control w-100 mt-1" name="no" placeholder="会員証の番号を入力" required></div><input type="submit" class="mt-4 btn btn-primary" value="登録"></form>';
