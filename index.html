@@ -54,7 +54,8 @@
             //LIFFで立ち上げているかどうかの判定
             if(liff.isInClient()){
               pElement.innerHTML='初回登録実施画面'
-
+              
+                ajaxConn("aaa");
               //LIFF初期化
               liff.init({
                 liffId: liffId
@@ -68,6 +69,22 @@
                 .then(()=>{
                   document.body.innerHTML = 'aaaa id' + lineId    
                     alert("ajax処理開始");
+
+                })
+                .catch((err) => {
+                   alert('error');   
+                }
+              })
+              .catch((err) => {
+                console.log('LIFF Initialization failed ', err);
+              });
+            }else{
+              //doument.body.innerHTML = 'LINEで開いてください'
+            }
+            
+        })
+
+        function ajaxConn(lineId){
                     $.ajax({
                         type: 'GET',
                         url: endpoint,
@@ -91,21 +108,8 @@
                           document.body.innerHTML = ''
                           alert("通信エラー");
                         }
-                    });
-                })
-                .catch((err) => {
-                   alert('error');   
-                }
-              })
-              .catch((err) => {
-                console.log('LIFF Initialization failed ', err);
-              });
-            }else{
-              //doument.body.innerHTML = 'LINEで開いてください'
-            }
-            
-        })
-
+                    });   
+        }
         function initializeLiff(liffId) {
             liff.init({
                 liffId: liffId
