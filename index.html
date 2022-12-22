@@ -60,11 +60,11 @@
                 liff.getProfile()
                   .then(profile=>{
                     lineId = profile.userId;
-
+                    pElement2.innerHTML = lineId
                   })
               })
               .then(()=>{
-                    pElement2.innerHTML = lineId
+                   alert("test")
               })              
             }else{
               document.body.innerHTML = 'LINEで開いてください'
