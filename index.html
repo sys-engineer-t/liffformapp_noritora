@@ -62,12 +62,15 @@
               .then(()=>{
                 //プロフィール情報の取得
                 liff.getProfile()
-                  .then(profile=>{
-                    lineId = profile.userId;
-                  })
+                .then(profile=>{
+                  lineId = profile.userId;
+                })
+                .then(()=>{
+                  document.body.innerHTML = 'bbbb' + lineId    
+                })
               })
               .then(()=>{
-                  document.body.innerHTML = 'aaaa'
+                  document.body.innerHTML = 'aaaa' + lineId
                    alert(lineId);
                   // initializeApp();
               }) 
