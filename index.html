@@ -6,202 +6,224 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="./modal.css">
 </head>
 <body>
-    <p id="liff-message"></p>
-    <p id="liff-message2"></p>
-    <span id="area"></span>
-    <!--
-        <div style="border-style: double;margin: 10px;padding: 10px;">
-        <div style="background-color: #99FF99;">
-        <h6><div style="text-align: center;font-family:Comic Sans MS;font-weight:bold;">トランポリンハウスNORI×NORI</div></h6>
-        <div class="" style="text-align: center;">会員番号：■</div>
-        </div>
-        </div>
-    -->
-    <!--
-    <form class="w-75 mx-auto">  
-        
-        <p class="mt-3">氏名(漢字)</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="name" required>
-        </div>
-        <p class="mt-3">会員番号</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="no" placeholder="会員証の番号を入力" required>
-        </div>
-        <input type="submit" class="mt-4 btn btn-primary" value="登録">
-    </form>
-    -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+<p id="liff-message"></p>
+<p id="liff-message2"></p>
+<span id="area"></span>
+<!--
+    <div style="border-style: double;margin: 10px;padding: 10px;">
+    <div style="background-color: #99FF99;">
+    <h6><div style="text-align: center;font-family:Comic Sans MS;font-weight:bold;">トランポリンハウスNORI×NORI</div></h6>
+    <div class="" style="text-align: center;">会員番号：■</div>
+    </div>
+    </div>
+-->
+<!--
+<form class="w-75 mx-auto">  
     
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script>
-        var lineId = ''
-        var lineName = ''
-        const endpoint = "https://script.google.com/macros/s/AKfycbymAuFiMgGWCD1ENzE8Tm9iP7Q7RtlgRdXTmQYKmS_HxtFRN0Q0giysD8jUfbvGxmjN/exec";
-        var settei="0";
-        $(document).ready(function () {
-            if(settei=="0"){
-            settei=1;   
-            const liffId = "1657758889-bBMyjVOA";
-            var lineiId = "";            
-            const divPage = document.getElementById('liff-page');
+    <p class="mt-3">氏名(漢字)</p>
+    <div>
+        <input class="form-control w-100 mt-1" name="name" required>
+    </div>
+    <p class="mt-3">会員番号</p>
+    <div>
+        <input class="form-control w-100 mt-1" name="no" placeholder="会員証の番号を入力" required>
+    </div>
+    <input type="submit" class="mt-4 btn btn-primary" value="登録">
+</form>
+-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+var lineId = ''
+var lineName = ''
+const endpoint = "https://script.google.com/macros/s/AKfycbymAuFiMgGWCD1ENzE8Tm9iP7Q7RtlgRdXTmQYKmS_HxtFRN0Q0giysD8jUfbvGxmjN/exec";
+var settei="0";
+$(document).ready(function () {
+  if(settei=="0"){
+  settei=1;   
+  const liffId = "1657758889-bBMyjVOA";
+  var lineiId = "";            
+  const divPage = document.getElementById('liff-page');
+  
+  //p要素の取得
+  const pElement = document.getElementById('liff-message');
             
-            //p要素の取得
-            const pElement = document.getElementById('liff-message');
-                      
-            //LIFFで立ち上げているかどうかの判定
-            if(liff.isInClient()){
-              pElement.innerHTML='読み込み中...'
-              
+  //LIFFで立ち上げているかどうかの判定
+  if(liff.isInClient()){
+    pElement.innerHTML='読み込み中...'
+    
 
-              //LIFF初期化
-              liff.init({
-                liffId: liffId
-              })
-              .then(()=>{
-                //プロフィール情報の取得
-                liff.getProfile()
-                .then(profile=>{
-                  lineId = profile.userId;
-                  lineName =  profile.displayName;
-                })
-                .then(()=>{
-                  //document.body.innerHTML = 'aaaa id' + lineId    
-                  ajaxConnGet(lineId);
-                })
-                .catch((err) => {
-                   alert('error');   
-                })
-              })
-              .catch((err) => {
-                console.log('LIFF Initialization failed ', err);
-              });
-            }else{
-              //doument.body.innerHTML = 'LINEで開いてください'
-              //ajaxConnGet("aaaa")//テスト用
-            }
-            
-                
-            
-            }
-        })
+    //LIFF初期化
+    liff.init({
+      liffId: liffId
+    })
+    .then(()=>{
+      //プロフィール情報の取得
+      liff.getProfile()
+      .then(profile=>{
+        lineId = profile.userId;
+        lineName =  profile.displayName;
+      })
+      .then(()=>{
+        //document.body.innerHTML = 'aaaa id' + lineId    
+        ajaxConnGet(lineId);
+      })
+      .catch((err) => {
+         alert('error');   
+      })
+    })
+    .catch((err) => {
+      console.log('LIFF Initialization failed ', err);
+    });
+  }else{
+    //doument.body.innerHTML = 'LINEで開いてください'
+    //ajaxConnGet("aaaa")//テスト用
+  }
+  
+      
+  
+  }
+})
 
-        function ajaxConnGet(lineId){
-                    $.ajax({
-                        type: 'GET',
-                        url: endpoint,
-                        dataType: 'jsonp',
-                        data: {
-                          text: lineId
-                        },
-                        success: out => {
-                          if(out.rslt=="###"){
-                             document.getElementById('liff-message').innerHTML = '登録画面';
-                             document.getElementById("liff-message").style = "text-align:center;"
-                             document.getElementById("area").innerHTML = '<form class="w-75 mx-auto"><p id="liff-message"></p><p id="liff-message2"></p><div class="mt-2">氏名(漢字)</div><div><input class="form-control w-100 mt-1" name="name" required=""></div><div class="mt-2">電話番号</div><div><input class="form-control w-100 mt-1" name="tel" required=""></div><div class="mt-2">会員番号</div><div><input class="form-control w-100 mt-1" name="no" placeholder="会員証の番号を入力" required=""></div><input type="button" class="mt-4 btn btn-primary" value="登録" onclick="submit_push()"></form>';
-                          }else{
-                             document.getElementById('liff-message').innerHTML = '';
-                             if(out.rslt == "VIP" || out.rslt == "ENGINEER"){
-                                 document.body.style.backgroundColor = "#FFD700";
-                             }else if(out.rslt == "MASTER"){
-                                 document.body.style.backgroundColor = "#CCCCFF";
-                             }else if(out.rslt == "STAFF"){
-                                 document.body.style.backgroundColor = "#FFCCCC";
-                             }else{
-                                 document.body.style.backgroundColor = "#99FF99";
-                             }
-                             var str1 = '<div style="border-style: double;margin: 10% 10%; padding: 10% 5%;"><div><h4><div style="text-align: center;font-family:Comic Sans MS;font-weight:bold;">トランポリンハウスNORI×NORI</div></h4><h5><div class="" style="text-align: center; margin-top: 15%;">会員番号：'
-                             var str2 = '</div></h5><h5><div class="" style="text-align: center; margin-top: 3%;">氏名：'
-                             var str3 = '</div></h5></div></div>'
-                             document.getElementById("area").innerHTML = str1 + out.rslt + str2 + out.name + str3
-                          }
-                        },
-                        error: function(){
-                          document.body.innerHTML = ''
-                          alert("通信エラー");
-                        }
-                    });   
+function ajaxConnGet(lineId){
+  $.ajax({
+      type: 'GET',
+      url: endpoint,
+      dataType: 'jsonp',
+      data: {
+        text: lineId
+      },
+      success: out => {
+        if(out.rslt=="###"){
+           document.getElementById('liff-message').innerHTML = '初回登録設定画面';
+           document.getElementById("liff-message").style = "text-align:center;"
+           document.getElementById("area").innerHTML = '<div class="modal js-modal"><div class="modal__bg js-modal-close"></div><div class="modal__content"><p id="modal_text"></p><div id="modal_btn_area"><input type="button" class="modal_btn" value="閉じる" onclick="modal_out()"></div></div><!--modal__inner--></div><!--modal-->' +
+           '<form class="w-75 mx-auto"><p id="liff-message"></p><p id="liff-message2"></p><div class="mt-2">氏名(漢字)</div><div><input class="form-control w-100 mt-1" name="name" required=""></div><div class="mt-2">電話番号</div><div><input class="form-control w-100 mt-1" name="tel" required=""></div><div class="mt-2">会員番号</div><div><input class="form-control w-100 mt-1" name="no" placeholder="会員証の番号を入力" required=""></div><input type="button" class="mt-4 btn btn-primary" value="登録" onclick="submit_push()"></form>';
+        }else{
+           document.getElementById('liff-message').innerHTML = '';
+           if(out.rslt == "VIP" || out.rslt == "ENGINEER"){
+               document.body.style.backgroundColor = "#FFD700";
+           }else if(out.rslt == "MASTER"){
+               document.body.style.backgroundColor = "#CCCCFF";
+           }else if(out.rslt == "STAFF"){
+               document.body.style.backgroundColor = "#FFCCCC";
+           }else{
+               document.body.style.backgroundColor = "#99FF99";
+           }
+           var str1 = '<div style="border-style: double;margin: 10% 10%; padding: 10% 5%;"><div><h4><div style="text-align: center;font-family:Comic Sans MS;font-weight:bold;">トランポリンハウスNORI×NORI</div></h4><h5><div class="" style="text-align: center; margin-top: 15%;">会員番号：'
+           var str2 = '</div></h5><h5><div class="" style="text-align: center; margin-top: 3%;">氏名：'
+           var str3 = '</div></h5></div></div>'
+           document.getElementById("area").innerHTML = str1 + out.rslt + str2 + out.name + str3
         }
-        function connPost(name,no){
-          var SendDATA = {
-             "name" : name,
-             "no" : no,
-             "lineId" : lineId,
-             "lineName" : lineName
-          };
-          var postparam = {
-            "method"     : "POST",
-            "mode"       : "no-cors",
-            "Content-Type" : "application/x-www-form-urlencoded",
-            "body" : JSON.stringify(SendDATA)
-          };
-          fetch(endpoint, postparam);
-        }        
-        function initializeLiff(liffId) {
-            liff.init({
-                liffId: liffId
-            }).then(() => {
-                initializeApp();
-            }).catch((err) => {
-                console.log('LIFF Initialization failed ', err);
-            });
-        }
+      },
+      error: function(){
+        document.body.innerHTML = ''
+        alert("通信エラー");
+      }
+  });   
+}
+function connPost(name,no,tel){
+  var SendDATA = {
+     "name" : name,
+     "no" : no,
+     "lineId" : lineId,
+     "lineName" : lineName,
+     "tel":tel
+  };
+  var postparam = {
+    "method"     : "POST",
+    "mode"       : "no-cors",
+    "Content-Type" : "application/x-www-form-urlencoded",
+    "body" : JSON.stringify(SendDATA)
+  };
+  fetch(endpoint, postparam);
+}        
+function initializeLiff(liffId) {
+    liff.init({
+        liffId: liffId
+    }).then(() => {
+        initializeApp();
+    }).catch((err) => {
+        console.log('LIFF Initialization failed ', err);
+    });
+}
 
-        function sendText(text) {
-            liff.sendMessages([{
-                'type': 'text',
-                'text': text
-            }]).then(function () {
-                liff.closeWindow();
-            }).catch(function (error) {
-                window.alert('Failed to send message ' + error);
-            });
-        }
+function sendText(text) {
+    liff.sendMessages([{
+        'type': 'text',
+        'text': text
+    }]).then(function () {
+        liff.closeWindow();
+    }).catch(function (error) {
+        window.alert('Failed to send message ' + error);
+    });
+}
 
-        function createData(name,no){
-            connPost(name,no)
-            document.body.innerHTML = '<div id="liff-message" style="text-align: center; margin-top:15%">設定完了しました。<br>このタブを閉じてください。</div>';            
-        }
-        const params = (new URL(document.location)).searchParams;
-        const key = params.get('key');
+function createData(){
+  const name = $('input[name="name"]').val();
+  const no = $('input[name="no"]').val();
+  const tel = $('input[name="tel"]').val();
+  connPost(name,no,tel);
+  modal_out();
+  document.body.innerHTML = '<div id="liff-message" style="text-align: center; margin-top:15%">設定完了しました。<br>このタブを閉じてください。</div>';            
+}
+const params = (new URL(document.location)).searchParams;
+const key = params.get('key');
 
-        
-        function submit_push() {
-                const name    = $('input[name="name"]').val();
-                const no = $('input[name="no"]').val();
-                const tel = $('input[name="tel"]').val();
-                
-                //電話番号チェック（ハイフン無し）
-                const regexp1 = /^0\d{9,10}$/;
-                // 固定
-                const regexp2 = /^0(\d-\d{4}|\d{2}-\d{3}|\d{3}-\d{2}|\d{4}-\d)-\d{4}$/;
-                // 携帯 IP
-                const regexp3 = /^(050|070|080|090)-\d{4}-\d{4}$/;
-                // フリーダイヤル
-                const regexp4 = /^0120-\d{3}-\d{3}$/;
-                if(!(regexp1.test(tel)||regexp2.test(tel)||regexp3.test(tel)||regexp4.test(tel))){
-                  window.alert('電話番号に不備があります');
-                  return false;                
-                }
-                //会員番号チェック
-                if (!no.match(/^[0-9]+$/)) {
-                  //半角数値
-                  window.alert('会員番号は半角数値で入力してください');
-                  return false;
-                }                
-                const msg = '${name}\n${no}';
-                if(window.confirm('氏名(漢字)：'+name+'\n電話番号：'+tel+'\n会員番号：'+no+'\n\nこの内容で間違いないですか？')){
-                  createData(name,no);
-                }
-                return false;
-        }
 
+function submit_push() {
+  const name = $('input[name="name"]').val();
+  const no = $('input[name="no"]').val();
+  const tel = $('input[name="tel"]').val();
+  
+  //電話番号チェック（ハイフン無し）
+  const regexp1 = /^0\d{9,10}$/;
+  // 固定
+  const regexp2 = /^0(\d-\d{4}|\d{2}-\d{3}|\d{3}-\d{2}|\d{4}-\d)-\d{4}$/;
+  // 携帯 IP
+  const regexp3 = /^(050|070|080|090)-\d{4}-\d{4}$/;
+  // フリーダイヤル
+  const regexp4 = /^0120-\d{3}-\d{3}$/;
+  if(!(regexp1.test(tel)||regexp2.test(tel)||regexp3.test(tel)||regexp4.test(tel))){
+    document.getElementById("modal_btn_area").innerHTML = '<input type="button" class="modal_btn" value="閉じる" onclick="modal_out()">'
+    document.getElementById("modal_text").innerHTML = "電話番号に不備があります";
+    modal_in();
+    return false;                
+  }
+  //会員番号チェック
+  if (!no.match(/^[0-9]+$/)) {
+    //半角数値
+    document.getElementById("modal_btn_area").innerHTML = '<input type="button" class="modal_btn" value="閉じる" onclick="modal_out()">'
+    document.getElementById("modal_text").innerHTML = "会員番号は<br>半角数値で入力してください";
+    modal_in();    
+    return false;
+  }                
+  const msg = '${name}\n${no}';
+  document.getElementById("modal_btn_area").innerHTML = '<input type="button" class="modal_btn btn_ok" value="OK" onclick="createData()"><input type="button" class="modal_btn" value="キャンセル" onclick="modal_out()">'
+  document.getElementById("modal_text").innerHTML = '氏名(漢字)：'+name+'<br>電話番号：'+tel+'<br>会員番号：'+no+'<br><br>この内容で間違いないですか？'
+  modal_in();    
+  //if(window.confirm('氏名(漢字)：'+name+'<br>電話番号：'+tel+'<br>会員番号：'+no+'<br><br>この内容で間違いないですか？')){
+    //createData(name,no);
+  //}
+  return false;
+}
+
+function modal_in(){
+  $('.js-modal').fadeIn();
+  return false;
+}
+function modal_out(){
+  $('.js-modal').fadeOut();
+  return false;
+}
     </script>
 
 </body>
