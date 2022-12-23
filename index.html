@@ -181,8 +181,15 @@ const key = params.get('key');
 
 function submit_push() {
   const name = $('input[name="name"]').val();
-  const no = $('input[name="no"]').val();
   const tel = $('input[name="tel"]').val();
+  const no = $('input[name="no"]').val();
+  //氏名チェック
+  if(name.replace(/\s+/g, "").length==0){
+    document.getElementById("modal_btn_area").innerHTML = '<input type="button" class="modal_btn" value="閉じる" onclick="modal_out()">'
+    document.getElementById("modal_text").innerHTML = "氏名は必須です";
+    modal_in();
+    return false;  
+  }
   
   //電話番号チェック（ハイフン無し）
   const regexp1 = /^0\d{9,10}$/;
@@ -192,14 +199,25 @@ function submit_push() {
   const regexp3 = /^(050|070|080|090)-\d{4}-\d{4}$/;
   // フリーダイヤル
   const regexp4 = /^0120-\d{3}-\d{3}$/;
-  if(!(regexp1.test(tel)||regexp2.test(tel)||regexp3.test(tel)||regexp4.test(tel))){
+  if(tel.replace(/\s+/g, "").length==0){
+    document.getElementById("modal_btn_area").innerHTML = '<input type="button" class="modal_btn" value="閉じる" onclick="modal_out()">'
+    document.getElementById("modal_text").innerHTML = "電話番号は必須です";
+    modal_in();
+    return false;  
+  }else if(!(regexp1.test(tel)||regexp2.test(tel)||regexp3.test(tel)||regexp4.test(tel))){
     document.getElementById("modal_btn_area").innerHTML = '<input type="button" class="modal_btn" value="閉じる" onclick="modal_out()">'
     document.getElementById("modal_text").innerHTML = "電話番号に不備があります";
     modal_in();
     return false;                
   }
+  
   //会員番号チェック
-  if (!no.match(/^[0-9]+$/)) {
+  if(no.replace(/\s+/g, "").length==0){
+    document.getElementById("modal_btn_area").innerHTML = '<input type="button" class="modal_btn" value="閉じる" onclick="modal_out()">'
+    document.getElementById("modal_text").innerHTML = "会員番号は必須です";
+    modal_in();
+    return false;  
+  }else if (!no.match(/^[0-9]+$/)) {
     //半角数値
     document.getElementById("modal_btn_area").innerHTML = '<input type="button" class="modal_btn" value="閉じる" onclick="modal_out()">'
     document.getElementById("modal_text").innerHTML = "会員番号は<br>半角数値で入力してください";
